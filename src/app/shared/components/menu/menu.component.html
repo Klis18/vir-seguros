@@ -1,0 +1,10 @@
+@for(item of menuItems; track item){
+    <div class="w-full p-2 text-white bg-cyan-800 hover:bg-cyan-900 cursor-pointer" [routerLink]="[item.routeLink]" routerLinkActive="router-link-active" >
+        <span class="flex items-center">
+            <mat-icon class="mr-4">
+                {{item.iconName}}
+            </mat-icon>
+            {{item.menuName}}
+        </span>
+    </div>
+}
