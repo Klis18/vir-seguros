@@ -10,6 +10,10 @@ export const routes: Routes = [
                 loadComponent: () => import("./insurances/pages/insurances/insurances.component").then(c => c.InsurancesComponent)
             },
             {
+                path:'asegurados',
+                loadComponent: () => import("./insured/pages/insured/insured.component").then(c => c.InsuredComponent)
+            },
+            {
                 path:'**',
                 redirectTo: 'seguros'
             }
