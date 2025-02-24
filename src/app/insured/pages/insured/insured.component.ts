@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { Insured } from '../../interfaces/insured.interface';
 
 @Component({
   selector: 'app-insured',
@@ -12,4 +13,5 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class InsuredComponent {
 
+ 
 }
