@@ -1,8 +1,7 @@
 <div class="p-8">
-
     <p class="text-2xl">{{typeForm}} Seguro</p>
     <hr>
-    <form [formGroup]="insuranceForm" class="grid grid-cols-2 gap-4" (submit)="onSubmit()">
+    <form [formGroup]="insuranceForm" class="grid grid-cols-2 gap-4 mt-5" (ngSubmit)="onSubmit()">
         <div>
             <label for="insuranceCode" class="block">Código seguro</label>
             <input type="text" formControlName="insuranceCode" placeholder="insu4" class="border-2 px-2 py-2 w-full rounded-lg">
@@ -19,8 +18,22 @@
             <label for="insuranceCost" class="block">Prima</label>
             <input type="text" formControlName="insuranceCost" placeholder="300" class="border-2 px-2 py-2 w-full rounded-lg">
         </div>
-        <div class="my-8">
-            <button class="px-4 py-2 bg-cyan-900 text-white rounded-lg">Guardar</button>
+
+        <div class="relative col-span-2">
+            <div class="absolute right-0 flex">
+
+                <button class="bg-cyan-900 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg mr-2" type="submit">
+                    <mat-icon class="mr-2">
+                        save
+                    </mat-icon>
+                    <span>
+                        Guardar
+                    </span>
+                </button>
+                <button class="bg-slate-800 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg" (click)="closeForm()">
+                    Cancelar
+                </button>
+            </div>
         </div>
     </form>
 </div>

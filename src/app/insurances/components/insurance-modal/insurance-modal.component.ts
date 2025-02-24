@@ -1,12 +1,14 @@
 import { Component, inject, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { InsurancesService } from '../../services/insurances.service';
 
 @Component({
   selector: 'app-insurance-modal',
   standalone: true,
   imports: [
+    MatIconModule,
     ReactiveFormsModule
   ],
   templateUrl: './insurance-modal.component.html',
@@ -17,6 +19,8 @@ export class InsuranceModalComponent implements OnInit{
   public typeForm!: string;
   public insuranceForm!: FormGroup;
   data = inject(MAT_DIALOG_DATA);
+
+  dialogRef = inject(MatDialogRef<InsuranceModalComponent>);
 
   constructor(private fb: FormBuilder, private insuranceService:InsurancesService){}
   ngOnInit(): void {
@@ -46,16 +50,23 @@ export class InsuranceModalComponent implements OnInit{
 
   editInsurance(){
     this.insuranceService.editInsurance(this.insuranceForm.value);
+    this.cleanForm();
   }
 
 
   addNewInsurance(){
     this.insuranceService.addInsurance(this.insuranceForm.value);
     this.cleanForm();
+    this.dialogRef.close();
+    
   }
 
   cleanForm(){
     this.insuranceForm.reset();
+  }
+
+  closeForm(){
+    this.dialogRef.close()
   }
 
 }

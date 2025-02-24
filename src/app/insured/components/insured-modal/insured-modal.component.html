@@ -1,0 +1,61 @@
+<div class="p-8">
+  <p class="text-2xl">{{ typeForm }} Asegurado</p>
+  <hr />
+  <form
+    [formGroup]="insuredForm"
+    class="grid grid-cols-2 gap-4 mt-5"
+    (ngSubmit)="onSubmit()"
+  >
+    <div>
+      <label for="id" class="block">Cédula</label>
+      <input
+        type="text"
+        formControlName="id"
+        class="px-2 py-2 w-full rounded-lg border-2"
+        placeholder="0997867567"
+      />
+    </div>
+    <div>
+      <label for="name" class="block">Nombre</label>
+      <input
+        type="text"
+        formControlName="name"
+        class="px-2 py-2 w-full rounded-lg border-2"
+        placeholder="Margarita Hernán"
+      />
+    </div>
+    <div>
+      <label for="phone" class="block">Teléfono</label>
+      <input
+        type="text"
+        formControlName="phone"
+        class="px-2 py-2 w-full rounded-lg border-2"
+        placeholder="0977656452"
+      />
+    </div>
+    <div>
+      <label for="age" class="block">Edad</label>
+      <input
+        type="text"
+        formControlName="age"
+        class="px-2 py-2 w-full rounded-lg border-2"
+        placeholder="28"
+      />
+    </div>
+
+    <div class="relative col-span-2">
+      <div class="absolute right-0 flex">
+        <button
+          class="bg-cyan-900 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg mr-2"
+          type="submit"
+        >
+          <mat-icon class="mr-2"> save </mat-icon>
+          <span> Guardar </span>
+        </button>
+        <button class="bg-slate-800 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg" (click)="closeForm()">
+            Cancelar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

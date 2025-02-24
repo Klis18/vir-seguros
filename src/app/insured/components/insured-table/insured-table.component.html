@@ -13,7 +13,7 @@
             @for(insured of insuredList; track insured){
                 <tr class="poppins-light text-center">
                     <td>
-                        <mat-icon class="text-blue-900 mr-2">
+                        <mat-icon class="text-blue-900 mr-2" (click)="editInsured(insured.id)">
                             edit
                         </mat-icon>
                         <mat-icon class="text-red-900" (click)="deleteInsured(insured.id)">
