@@ -1,0 +1,29 @@
+<table class="w-full">
+    <thead class="bg-cyan-900 text-white text-center">
+        <tr class="poppins-regular">
+            <td class="p-2">Acciones</td>
+            <td>Id</td>
+            <td>Nombre seguro</td>
+            <td>Suma asegurada</td>
+            <td>Prima</td>
+        </tr>
+    </thead>
+    <tbody class="poppins-light text-center">
+        @for(insurance of insurances; track insurance){
+            <tr>
+                <td>
+                    <mat-icon class="mr-4 text-blue-900" (click)="editInsurance(insurance.insuranceCode)">
+                        edit
+                    </mat-icon>
+                    <mat-icon class="text-red-900 cursor-pointer" (click)="deleteInsurance(insurance.insuranceCode)">
+                        delete
+                    </mat-icon>
+                </td>
+                <td>{{insurance.insuranceCode}}</td>
+                <td>{{insurance.insuranceName}}</td>
+                <td>{{insurance.sumInsured}}</td>
+                <td>{{insurance.insuranceCost}}</td>
+            </tr>
+        }
+    </tbody>
+</table>

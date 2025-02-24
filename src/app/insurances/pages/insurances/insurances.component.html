@@ -1,6 +1,6 @@
 <div class="flex items-center">
     <span class="text-3xl mr-2">Seguros</span>
-    <span class="flex items-center justify-center px-4 py-2 bg-cyan-900 text-white w-fit rounded-lg">
+    <span class="flex items-center justify-center px-4 py-2 bg-cyan-900 text-white w-fit rounded-lg" (click)="addInsurance()">
         <mat-icon>
             add
         </mat-icon>
@@ -9,5 +9,5 @@
 </div>
 
 <div class="my-8">
-
+    <app-insurances-table></app-insurances-table>
 </div>

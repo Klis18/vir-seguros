@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Insurance } from '../interfaces/insurance.interface';
 
+type NewType = Insurance;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,21 +35,24 @@ export class InsurancesService {
     return this.insurancesList;
   }
 
+  getInsuranceByCode(insuranceCode:string): Insurance{
+    const index = this.insurancesList.findIndex(insurance => insurance.insuranceCode === insuranceCode);
+    return this.insurancesList[index];
+  }
+
   addInsurance(insurance:Insurance){
     this.insurancesList.push(insurance);
   }
 
-  // Eliminar un seguro basado en el insuranceCode
   deleteInsurance(insuranceCode: string): void {
     this.insurancesList = this.insurancesList.filter(insurance => insurance.insuranceCode !== insuranceCode);
   }
 
-  // Editar un seguro basado en el insuranceCode
   editInsurance(updatedInsurance: Insurance): void {
     const index = this.insurancesList.findIndex(insurance => insurance.insuranceCode === updatedInsurance.insuranceCode);
     if (index !== -1) {
-      // Actualizar los valores del seguro encontrado
       this.insurancesList[index] = updatedInsurance;
     }
+
   }
 }
