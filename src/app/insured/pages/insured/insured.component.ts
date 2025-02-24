@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Insured } from '../../interfaces/insured.interface';
+
+import { InsuredTableComponent } from '../../components/insured-table/insured-table.component';
 
 @Component({
   selector: 'app-insured',
   standalone: true,
   imports: [
-    MatIconModule
+    MatIconModule,
+
+    InsuredTableComponent
   ],
   templateUrl: './insured.component.html',
   styleUrl: './insured.component.css'
