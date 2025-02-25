@@ -30,7 +30,8 @@ export class InsurancesComponent {
           type: 'add'
         },
         width:'700px',
-        maxWidth:'800px'
+        maxWidth:'800px',
+        height:'55%'
       });
       
       dialogRef.afterClosed().subscribe(res=>{
