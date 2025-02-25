@@ -32,6 +32,10 @@ export class InsurancesService {
   constructor() { }
 
   getInsurances():Insurance[]{
+    const localStorageData = localStorage.getItem('insuranceList');
+    if(localStorageData){
+      this.insurancesList = JSON.parse(localStorageData) 
+    } 
     return this.insurancesList;
   }
 
@@ -42,10 +46,12 @@ export class InsurancesService {
 
   addInsurance(insurance:Insurance){
     this.insurancesList.push(insurance);
+    this.saveChangesInLocalStorage();
   }
 
   deleteInsurance(insuranceCode: string): void {
     this.insurancesList = this.insurancesList.filter(insurance => insurance.insuranceCode !== insuranceCode);
+    this.saveChangesInLocalStorage();
   }
 
   editInsurance(updatedInsurance: Insurance): void {
@@ -53,6 +59,10 @@ export class InsurancesService {
     if (index !== -1) {
       this.insurancesList[index] = updatedInsurance;
     }
+    this.saveChangesInLocalStorage();
+  }
 
+  saveChangesInLocalStorage(){
+    localStorage.setItem('insuranceList',JSON.stringify(this.insurancesList));
   }
 }
