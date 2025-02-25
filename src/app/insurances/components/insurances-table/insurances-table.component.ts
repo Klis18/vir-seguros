@@ -4,10 +4,9 @@ import { Insurance } from '../../interfaces/insurance.interface';
 
 import { MatIconModule } from '@angular/material/icon';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog'
-import { DialogModule } from '@angular/cdk/dialog';
 import { InsuranceModalComponent } from '../insurance-modal/insurance-modal.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-insurances-table',
@@ -35,10 +34,10 @@ export class InsurancesTableComponent implements OnInit{
   totalPages !:number;
   ngOnInit(): void {
    this.getListInsurance();
-   //Paginación
-  this.itemsPerPage = 5;
-  this.currentPage = 1;
-  this.totalPages = Math.ceil(this.insurances.length / this.itemsPerPage);
+   
+    this.itemsPerPage = 5;
+    this.currentPage = 1;
+    this.totalPages = Math.ceil(this.insurances.length / this.itemsPerPage);
   }
 
   getListInsurance(){
@@ -77,6 +76,8 @@ export class InsurancesTableComponent implements OnInit{
   changePage(page:number){
     if(page>=1 && page<=this.totalPages){
       this.currentPage = page;
+    }else{
+      this.currentPage = 1;
     }
   }
 

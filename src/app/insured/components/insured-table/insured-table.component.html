@@ -1,31 +1,57 @@
 <div class="py-8">
-    <table class="w-full">
-        <thead>
-            <tr class="bg-cyan-900 text-white text-center">
-                <td class="py-2">Acciones</td>
-                <td>Cédula</td>
-                <td>Nombre</td>
-                <td>Teléfono</td>
-                <td>Edad</td>
-            </tr>
-        </thead>
-        <tbody>
-            @for(insured of insuredList; track insured){
-                <tr class="poppins-light text-center">
-                    <td>
-                        <mat-icon class="text-blue-900 mr-2" (click)="editInsured(insured.id)">
-                            edit
-                        </mat-icon>
-                        <mat-icon class="text-red-900" (click)="deleteInsured(insured.id)">
-                            delete
-                        </mat-icon>
-                    </td>
-                    <td>{{insured.id}}</td>
-                    <td>{{insured.name}}</td>
-                    <td>{{insured.phone}}</td>
-                    <td>{{insured.age}}</td>
+    @if(insuredList.length >= 0){
+        <table class="w-full">
+            <thead>
+                <tr class="bg-cyan-900 text-white text-center">
+                    <td class="py-2">Acciones</td>
+                    <td>Cédula</td>
+                    <td>Nombre</td>
+                    <td>Teléfono</td>
+                    <td>Edad</td>
                 </tr>
+            </thead>
+            <tbody>
+                @for(insured of getPageData(); track insured){
+                    <tr class="poppins-light text-center">
+                        <td class="py-2">
+                            <mat-icon class="text-blue-900 mr-4" (click)="editInsured(insured.id)">
+                                edit
+                            </mat-icon>
+                            <mat-icon class="text-red-900" (click)="deleteInsured(insured.id)">
+                                delete
+                            </mat-icon>
+                        </td>
+                        <td>{{insured.id}}</td>
+                        <td>{{insured.name}}</td>
+                        <td>{{insured.phone}}</td>
+                        <td>{{insured.age}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 px-2 flex justify-end items-center">
+            @if(currentPage > 1){
+        
+                <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
+                    <mat-icon>
+                        chevron_left
+                    </mat-icon>
+                </button>
             }
-        </tbody>
-    </table>
+                <span>Página </span>
+                    <input  type="number" 
+                            [(ngModel)]="currentPage" 
+                            (change)="changePage(currentPage)"
+                            [min]="1"
+                            [max]="totalPages" 
+                            class="rounded-lg border-2 size-8 text-center"
+                    />
+                <span> de {{totalPages}}</span>
+                <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
+                    <mat-icon>
+                        chevron_right
+                    </mat-icon>
+                </button>
+        </div>
+    }
 </div>
