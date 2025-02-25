@@ -46,13 +46,11 @@ export class InsuredModalComponent implements OnInit{
 
   addInsured(){
     this.insuredService.addInsured(this.insuredForm.value);
-    this.cleanForm();
     this.dialogRef.close();
   }
 
   editInsured(){
     this.insuredService.updateInsured(this.insuredForm.value);
-    this.cleanForm();
     this.dialogRef.close();
   }
 

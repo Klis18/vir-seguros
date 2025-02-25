@@ -6,13 +6,15 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog'
 import { DialogModule } from '@angular/cdk/dialog';
 import { InsuranceModalComponent } from '../insurance-modal/insurance-modal.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-insurances-table',
   standalone: true,
   imports: [
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    CommonModule
   ],
   templateUrl: './insurances-table.component.html',
   styles: ``

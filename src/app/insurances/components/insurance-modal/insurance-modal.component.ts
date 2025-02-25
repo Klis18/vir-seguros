@@ -50,15 +50,13 @@ export class InsuranceModalComponent implements OnInit{
 
   editInsurance(){
     this.insuranceService.editInsurance(this.insuranceForm.value);
-    this.cleanForm();
+    this.closeForm()
   }
 
 
   addNewInsurance(){
     this.insuranceService.addInsurance(this.insuranceForm.value);
-    this.cleanForm();
-    this.dialogRef.close();
-    
+    this.closeForm();
   }
 
   cleanForm(){
