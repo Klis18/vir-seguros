@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, NgModule, OnInit } from '@angular/core';
 import { InsurancesService } from '../../services/insurances.service';
 import { Insurance } from '../../interfaces/insurance.interface';
 
@@ -7,6 +7,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog'
 import { DialogModule } from '@angular/cdk/dialog';
 import { InsuranceModalComponent } from '../insurance-modal/insurance-modal.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-insurances-table',
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     MatIconModule,
     MatDialogModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './insurances-table.component.html',
   styles: ``
@@ -27,8 +29,16 @@ export class InsurancesTableComponent implements OnInit{
 
   constructor(private insurancesService: InsurancesService){}
 
+  //Paginación
+  itemsPerPage!:number; 
+  currentPage!:number; 
+  totalPages !:number;
   ngOnInit(): void {
    this.getListInsurance();
+   //Paginación
+  this.itemsPerPage = 5;
+  this.currentPage = 1;
+  this.totalPages = Math.ceil(this.insurances.length / this.itemsPerPage);
   }
 
   getListInsurance(){
@@ -54,6 +64,20 @@ export class InsurancesTableComponent implements OnInit{
     dialogRef.afterClosed().subscribe(res=>{
       console.log('modal cerrado');
     })
+  }
+
+
+
+  getPageData(){
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = this.currentPage * this.itemsPerPage;
+    return this.insurances.slice(start,end);
+  }
+
+  changePage(page:number){
+    if(page>=1 && page<=this.totalPages){
+      this.currentPage = page;
+    }
   }
 
 }
