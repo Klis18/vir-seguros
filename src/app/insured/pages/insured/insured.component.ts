@@ -5,19 +5,25 @@ import { InsuredTableComponent } from '../../components/insured-table/insured-ta
 import { InsuredModalComponent } from '../../components/insured-modal/insured-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 
+import * as XLSX from 'xlsx';
+import { InsuredService } from '../../services/insured.service';
+import { Insured } from '../../interfaces/insured.interface';
+import { MassLoadingInsuredComponent } from '../../components/mass-loading-insured/mass-loading-insured.component';
+
 @Component({
   selector: 'app-insured',
   standalone: true,
   imports: [
     MatIconModule,
-    InsuredTableComponent
+    InsuredTableComponent,
+    MassLoadingInsuredComponent
   ],
   templateUrl: './insured.component.html',
   styleUrl: './insured.component.css'
 })
 export class InsuredComponent {
 
-  constructor(private dialog: MatDialog){}
+  constructor(private dialog: MatDialog, private insuredService: InsuredService){}
 
   addInsured(){
     const dialogRef = this.dialog.open(InsuredModalComponent,{
@@ -32,4 +38,5 @@ export class InsuredComponent {
           console.log('Modal agregar, cerrado')
         })
   }
+
 }
