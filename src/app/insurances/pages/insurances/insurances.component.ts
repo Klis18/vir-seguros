@@ -4,6 +4,7 @@ import { InsurancesTableComponent } from '../../components/insurances-table/insu
 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { InsuranceModalComponent } from '../../components/insurance-modal/insurance-modal.component';
+import { MassLoadingInsurancesComponent } from '../../components/mass-loading-insurances/mass-loading-insurances.component';
 
 @Component({
   selector: 'app-insurances',
@@ -11,7 +12,8 @@ import { InsuranceModalComponent } from '../../components/insurance-modal/insura
   imports: [
     MatDialogModule,
     MatIconModule,
-    InsurancesTableComponent
+    InsurancesTableComponent,
+    MassLoadingInsurancesComponent
   ],
   templateUrl: './insurances.component.html',
   styleUrl: './insurances.component.css'
