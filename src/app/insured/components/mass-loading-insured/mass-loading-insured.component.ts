@@ -34,11 +34,11 @@ export class MassLoadingInsuredComponent {
 
         datosExcel.forEach((fila:any, index:number) => {
           if(index>0 && fila.length === 4){
-            const id = fila[0];
-            const name = fila[1];
+            const insuredId = fila[0];
+            const insuredName = fila[1];
             const phone = fila[2];
             const age = fila[3];
-            const insuredData = {id,name,phone,age};
+            const insuredData = {insuredId,insuredName,phone,age};
             this.addMasiveInsured(insuredData);
           }else {
             console.log(`Fila ${index + 1} no tiene 4 columnas.`);

@@ -1,1 +1,32 @@
-<p>insured-insurances-table works!</p>
+<div class="py-8">
+    <table class="w-full text-center">
+        <thead>
+            <tr class="bg-cyan-900 text-white">
+                <td class="py-2">Acciones</td>
+                <td>Id</td>
+                <td>Cédula</td>
+                <td>Asegurado</td>
+                <td>Código seguro</td>
+                <td>Seguro</td>
+                <td>Estado</td>
+            </tr>
+        </thead>
+        <tbody>
+            @for(register of insuranceInsuredData; track register){
+                <tr>
+                    <td class="py-2">
+                        <mat-icon class="text-red-800">
+                            delete
+                        </mat-icon>
+                    </td>
+                    <td>{{register.id}}</td>
+                    <td>{{register.insuredId}}</td>
+                    <td>{{register.insuredName}}</td>
+                    <td>{{register.insuranceCode}}</td>
+                    <td>{{register.insuranceName}}</td>
+                    <td>{{register.state}}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
