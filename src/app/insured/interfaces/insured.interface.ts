@@ -1,6 +1,6 @@
 export interface Insured{
-    id: string;
-    name: string;
+    insuredId: string;
+    insuredName: string;
     phone: string;
     age: string;
 }

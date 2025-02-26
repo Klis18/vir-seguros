@@ -8,20 +8,20 @@ export class InsuredService {
 
   public insuredList : Insured[] = [
     {
-      id: '0996716599',
-      name: 'Lia Valenzuela',
+      insuredId: '0996716599',
+      insuredName: 'Lia Valenzuela',
       phone: '0997685674',
       age: '32'
     },
     {
-      id: '0967845654',
-      name: 'Roberto Sandoval',
+      insuredId: '0967845654',
+      insuredName: 'Roberto Sandoval',
       phone: '0998887675',
       age: '29'
     },
     {
-      id: '0912343432',
-      name: 'Laura Benavides',
+      insuredId: '0912343432',
+      insuredName: 'Laura Benavides',
       phone: '0992276765',
       age: '45'
     }
@@ -36,7 +36,7 @@ export class InsuredService {
   }
 
   getInsured(insuredCode: string):Insured{
-    const index = this.insuredList.findIndex(insured => insured.id == insuredCode);
+    const index = this.insuredList.findIndex(insured => insured.insuredId == insuredCode);
     return this.insuredList[index];
   }
 
@@ -46,12 +46,12 @@ export class InsuredService {
   }
 
   deleteInsured(insuredId:string){
-    this.insuredList = this.insuredList.filter(insurance => insurance.id !== insuredId);
+    this.insuredList = this.insuredList.filter(insured => insured.insuredId !== insuredId);
     this.saveInLocalStorage();
   }
 
   updateInsured(updateInsured: Insured){
-    const index = this.insuredList.findIndex(insured => insured.id === updateInsured.id);
+    const index = this.insuredList.findIndex(insured => insured.insuredId === updateInsured.insuredId);
     if(index!==-1){
       this.insuredList[index]= updateInsured;
     }

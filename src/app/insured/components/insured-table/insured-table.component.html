@@ -14,15 +14,15 @@
                 @for(insured of getPageData(); track insured){
                     <tr class="poppins-light text-center">
                         <td class="py-2">
-                            <mat-icon class="text-blue-900 mr-4" (click)="editInsured(insured.id)">
+                            <mat-icon class="text-blue-900 mr-4" (click)="editInsured(insured.insuredId)">
                                 edit
                             </mat-icon>
-                            <mat-icon class="text-red-900" (click)="deleteInsured(insured.id)">
+                            <mat-icon class="text-red-900" (click)="deleteInsured(insured.insuredId)">
                                 delete
                             </mat-icon>
                         </td>
-                        <td>{{insured.id}}</td>
-                        <td>{{insured.name}}</td>
+                        <td>{{insured.insuredId}}</td>
+                        <td>{{insured.insuredName}}</td>
                         <td>{{insured.phone}}</td>
                         <td>{{insured.age}}</td>
                     </tr>
