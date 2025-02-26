@@ -11,11 +11,18 @@ import { Router, RouterLink, Routes } from '@angular/router';
     RouterLink
   ],
   templateUrl: './menu.component.html',
-  styles: ``
+  styles: `
+
+  `
 })
 export class MenuComponent {
 
   public menuItems: Menu[] = [
+    {
+      iconName: 'home',
+      menuName: 'Inicio',
+      routeLink: 'home'
+    },
     {
       iconName: 'shield_lock',
       menuName: 'Seguros',
@@ -27,9 +34,9 @@ export class MenuComponent {
       routeLink: 'asegurados'
     },
     {
-      iconName: 'person_search',
-      menuName: 'Consulta de seguros',
-      routeLink: 'consulta-asegurados'
+      iconName: 'assignment_add',
+      menuName: 'Asignación de seguros',
+      routeLink: 'asignacion-seguros-asegurados'
     }
   ]
 
