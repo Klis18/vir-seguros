@@ -54,16 +54,20 @@ export class InsuredInsurancesService {
   assignInsurance(insurancesInsured:InsurancesInsured){
     this.insuredInsurancesList.push(insurancesInsured);
   }
-
-  // deleteInsuranceInsured(idRegister: string){
-  //   this.insuredInsurancesList = this.insuredInsurancesList.filter(registers => registers.id !== idRegister);
-  // }
-
+  
   updateStatusInsuranceInsured(insuranceInsuredId:string){
     const index = this.insuredInsurancesList.findIndex(register => register.id === insuranceInsuredId );
     if(index!==-1){
       this.insuredInsurancesList[index].state = 'Inactive';
     }
+  }
+
+  getListInsurancesInsuredByInsuredId(insuredId: string){
+    this.insuredInsurancesList = this.insuredInsurancesList.filter(register => register.insuredId === insuredId);
+  }
+
+  getListInsuredInsurancesByInsuranceCode(insuranceCode: string){
+    this.insuredInsurancesList = this.insuredInsurancesList.filter(register => register.insuranceCode === insuranceCode);
   }
 
   

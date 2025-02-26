@@ -26,4 +26,8 @@ export class InsuredInsurancesTableComponent implements OnInit{
     return this.insuredInsurancesService.getListInsurancesInsuredAssignments();
   }
 
+  deleteInsuredInsurance(id:string){
+    this.insuredInsurancesService.updateStatusInsuranceInsured(id);
+  }
+
 }

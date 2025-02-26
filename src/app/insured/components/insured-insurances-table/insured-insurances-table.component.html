@@ -13,13 +13,15 @@
         </thead>
         <tbody>
             @for(register of insuranceInsuredData; track register){
-                <tr>
-                    <td class="py-2">
-                        <mat-icon class="text-red-800">
-                            delete
-                        </mat-icon>
+                <tr class="border-b-2">
+                    <td>
+                        @if(register.state !== 'Inactive'){
+                            <mat-icon class="text-red-800 cursor-pointer" (click)="deleteInsuredInsurance(register.id)">
+                                delete
+                            </mat-icon>
+                        }
                     </td>
-                    <td>{{register.id}}</td>
+                    <td class="py-4">{{register.id}}</td>
                     <td>{{register.insuredId}}</td>
                     <td>{{register.insuredName}}</td>
                     <td>{{register.insuranceCode}}</td>
