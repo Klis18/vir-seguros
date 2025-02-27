@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { InsurancesService } from '../../../insurances/services/insurances.service';
 import { Insurance } from '../../../insurances/interfaces/insurance.interface';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { InsuredInsurancesService } from '../../../shared/services/insured-insurances.service';
-import { InsurancesInsured } from '../../../shared/interfaces/insured-insurances.interface';
+import { SelectInsuredComponent } from '../select-insured/select-insured.component';
+import { Insured } from '../../interfaces/insured.interface';
 
 @Component({
   selector: 'app-insurances-asignment-modal',
@@ -21,12 +22,19 @@ export class InsurancesAsignmentModalComponent implements OnInit{
 
   public insurancesList: Insurance[] = []
 
-  public insureCodeSelected: string = '';
+  public insuranceSelectedCode: string = '';
+  public insuredSelectedId: string = '';
+  public insuredSelectedName: string = '';
+
+  public insuranceSelectedData!: Insurance;
+  public insuredSelectedData!: Insured;
 
 
   public dialogRef = inject(MatDialogRef<InsurancesAsignmentModalComponent>);
 
-  constructor(private insurancesService: InsurancesService, private insuranInsuredService: InsuredInsurancesService){}
+  constructor(private insurancesService: InsurancesService, 
+              private insuranInsuredService: InsuredInsurancesService,
+              private dialog: MatDialog){}
 
   ngOnInit(): void {
     this.getInsurancesList();
@@ -36,11 +44,42 @@ export class InsurancesAsignmentModalComponent implements OnInit{
     this.insurancesList = this.insurancesService.getInsurances();
   }
 
-  closeModal(){
-    this.dialogRef.close();
+  
+  
+  openInsuredList(){
+    const dialogRef = this.dialog.open(SelectInsuredComponent,
+      {
+        width:'700px',
+        maxWidth:'800px',
+        height:'80%'
+      }
+    );
+    
+    dialogRef.afterClosed().subscribe(res=>{
+      this.insuredSelectedData = res;
+      this.insuredSelectedName = this.insuredSelectedData.insuredName;
+    })
   }
 
-  saveInsuranceAssignment(assignment:InsurancesInsured){
-    this.insuranInsuredService.assignInsurance(assignment);
+  getInsuranceSelectedByCode():Insurance{
+    this.insuranceSelectedData = this.insurancesService.getInsuranceByCode(this.insuranceSelectedCode);
+    return this.insuranceSelectedData;
+  }
+
+  saveInsuranceAssignment(){
+    this.getInsuranceSelectedByCode();
+    const assignmentData = {
+      id: 'reg20',
+      state: 'Active',
+      ...this.insuredSelectedData,
+      ...this.insuranceSelectedData
+    }
+    console.log('Asignación a guardar', assignmentData);
+    this.insuranInsuredService.assignInsurance(assignmentData);
+    this.closeModal();
+  }
+
+  closeModal(){
+    this.dialogRef.close();
   }
 }

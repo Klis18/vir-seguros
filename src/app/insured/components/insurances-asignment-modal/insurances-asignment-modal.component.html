@@ -11,13 +11,13 @@
         <div>
             <label for="insured" class="block">Asegurado</label>
             <div class="flex items-center">
-                <input type="text" readonly class="w-fit p-2 border-2 rounded-lg mr-2">
-                <button class="p-2 bg-cyan-900 text-center rounded-lg text-white">Seleccionar Asegurado</button>
+                <input type="text" readonly class="w-fit p-2 border-2 rounded-lg mr-2" [(ngModel)]="insuredSelectedName">
+                <button class="p-2 bg-cyan-900 text-center rounded-lg text-white" (click)="openInsuredList()">Seleccionar Asegurado</button>
             </div>
         </div>
         <div>
             <label for="insurance" class="block">Seguro</label>
-            <select name="insurance" id="insurance" class="p-2 border-2 rounded-lg w-full" [(ngModel)]="insureCodeSelected">
+            <select name="insurance" id="insurance" class="p-2 border-2 rounded-lg w-full" [(ngModel)]="insuranceSelectedCode">
                 <option value="">--Selecciona un seguro--</option>
                 @for(insurances of insurancesList; track insurances){
                     <option [value]="insurances.insuranceCode">{{insurances.insuranceName}}</option>
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="mt-8 flex justify-end">
-        <button class="p-2 bg-cyan-900 text-white rounded-lg flex items-center justify-center mr-2">
+        <button class="p-2 bg-cyan-900 text-white rounded-lg flex items-center justify-center mr-2" (click)="saveInsuranceAssignment()">
             <mat-icon>
                 save
             </mat-icon>

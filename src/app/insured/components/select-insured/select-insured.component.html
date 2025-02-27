@@ -1,0 +1,7 @@
+<div class="p-8">
+    <p class="text-2xl">Asegurados</p>
+    <hr>
+    <div>
+        <app-insured-table [tableType]="'Assignment'" (sendInsuredCodeSelected)="getIdInsuredSelected($event)"></app-insured-table>
+    </div>
+</div>
