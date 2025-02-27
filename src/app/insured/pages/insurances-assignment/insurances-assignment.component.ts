@@ -25,7 +25,7 @@ export class InsurancesAssignmentComponent {
       {
         width:'700px',
         maxWidth: '800px',
-        height: '40%'
+        height: '45%',
       }
     );
 

@@ -1,1 +1,39 @@
-<p>insurances-asignment-modal works!</p>
+<div class="flex justify-end pt-4 pb-2 px-4">
+    <mat-icon class="text-slate-800 hover:text-red-800" (click)="closeModal()">
+        close
+    </mat-icon>
+</div>
+<div class="pb-8 px-8">
+    <p class="text-2xl">Asignar Seguros a Asegurados</p>
+    <hr>
+
+    <div class="flex mt-6 gap-6">
+        <div>
+            <label for="insured" class="block">Asegurado</label>
+            <div class="flex items-center">
+                <input type="text" readonly class="w-fit p-2 border-2 rounded-lg mr-2">
+                <button class="p-2 bg-cyan-900 text-center rounded-lg text-white">Seleccionar Asegurado</button>
+            </div>
+        </div>
+        <div>
+            <label for="insurance" class="block">Seguro</label>
+            <select name="insurance" id="insurance" class="p-2 border-2 rounded-lg w-full">
+                <option value="">--Selecciona un seguro--</option>
+                @for(insurances of insurancesList; track insurances){
+                    <option [value]="insurances.insuranceCode">{{insurances.insuranceName}}</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="mt-8 flex justify-end">
+        <button class="p-2 bg-cyan-900 text-white rounded-lg flex items-center justify-center mr-2">
+            <mat-icon>
+                save
+            </mat-icon>
+            Guardar
+        </button>
+        <button class="p-2 bg-slate-800 text-white rounded-lg" (click)="closeModal()">
+            Cancelar
+        </button>
+    </div>
+</div>
