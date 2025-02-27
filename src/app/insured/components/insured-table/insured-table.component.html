@@ -12,14 +12,21 @@
             </thead>
             <tbody>
                 @for(insured of getPageData(); track insured){
-                    <tr class="poppins-light text-center">
+                    <tr class="poppins-light text-center border-b-2">
                         <td class="py-2">
-                            <mat-icon class="text-blue-900 mr-4" (click)="editInsured(insured.insuredId)">
-                                edit
-                            </mat-icon>
-                            <mat-icon class="text-red-900" (click)="deleteInsured(insured.insuredId)">
-                                delete
-                            </mat-icon>
+                            @if(tableType === 'Assignment'){
+                                <mat-icon class="text-cyan-900 mr-4" (click)="sendInsured(insured.insuredId)">
+                                    add
+                                </mat-icon>
+                            }
+                            @if(tableType === 'Insured'){
+                                <mat-icon class="text-blue-900 mr-4" (click)="editInsured(insured.insuredId)">
+                                    edit
+                                </mat-icon>
+                                <mat-icon class="text-red-900" (click)="deleteInsured(insured.insuredId)">
+                                    delete
+                                </mat-icon>
+                            }
                         </td>
                         <td>{{insured.insuredId}}</td>
                         <td>{{insured.insuredName}}</td>

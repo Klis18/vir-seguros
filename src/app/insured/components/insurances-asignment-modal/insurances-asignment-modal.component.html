@@ -17,7 +17,7 @@
         </div>
         <div>
             <label for="insurance" class="block">Seguro</label>
-            <select name="insurance" id="insurance" class="p-2 border-2 rounded-lg w-full">
+            <select name="insurance" id="insurance" class="p-2 border-2 rounded-lg w-full" [(ngModel)]="insureCodeSelected">
                 <option value="">--Selecciona un seguro--</option>
                 @for(insurances of insurancesList; track insurances){
                     <option [value]="insurances.insuranceCode">{{insurances.insuranceName}}</option>

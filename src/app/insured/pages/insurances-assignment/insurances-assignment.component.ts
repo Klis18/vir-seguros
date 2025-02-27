@@ -19,7 +19,6 @@ export class InsurancesAssignmentComponent {
 
   constructor(private dialog:MatDialog){}
 
-
   addAsignment(){
     const dialogRef = this.dialog.open(InsurancesAsignmentModalComponent,
       {

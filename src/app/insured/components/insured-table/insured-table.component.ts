@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule} from '@angular/material/dialog';
 
@@ -6,6 +6,7 @@ import { InsuredService } from '../../services/insured.service';
 import { Insured } from '../../interfaces/insured.interface';
 import { InsuredModalComponent } from '../insured-modal/insured-modal.component';
 import { FormsModule } from '@angular/forms';
+import { Insurance } from '../../../insurances/interfaces/insurance.interface';
 
 @Component({
   selector: 'app-insured-table',
@@ -19,6 +20,12 @@ import { FormsModule } from '@angular/forms';
   styles: ``
 })
 export class InsuredTableComponent implements OnInit{
+
+  @Output()
+  sendInsuredCodeSelected: EventEmitter<string> = new EventEmitter<string>;
+
+  @Input()
+  tableType: string = '';
 
   public insuredList!: Insured[]
 
@@ -39,6 +46,10 @@ export class InsuredTableComponent implements OnInit{
 
   getInsuredList(){
     this.insuredList = this.insuredService.getInsuredList();
+  }
+
+  sendInsured(insuredId:string){
+    this.sendInsuredCodeSelected.emit(insuredId);
   }
 
   deleteInsured(insuredId: string){
