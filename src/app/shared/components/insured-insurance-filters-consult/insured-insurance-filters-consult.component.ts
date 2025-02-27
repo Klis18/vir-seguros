@@ -66,10 +66,6 @@ export class InsuredInsuranceFiltersConsultComponent implements OnInit{
     console.log('Lista filtrada por código de seguro', this.filteredList);
   }
 
-  // getListFiltered(insuredId:string, insurancesCode:string){
-  //   this.filteredList = this.insuredInsuranceService.getListFiltered(insuredId, insurancesCode);
-  //   this.sendFilteredData.emit(this.filteredList);
-  // }
 
   getAllInsuredInsuranList(){
     this.insuredInsuranceService.getListInsurancesInsuredAssignments();
