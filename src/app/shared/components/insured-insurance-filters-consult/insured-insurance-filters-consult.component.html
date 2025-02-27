@@ -1,0 +1,37 @@
+<div class="flex">
+    <div class="mr-2">
+        <label for="typeSearch" class="block poppins-regular">Tipo de búsqueda</label>
+        <select name="typeSearch" id="typeSearch" class="border-2 rounded-lg p-2" [(ngModel)]="typeSearch">
+            <option value="">--Seleccione el tipo de búsqueda---</option>
+            <option value="insuredId">Cédula</option>
+            <option value="insuranceCode">Código de seguro</option>
+        </select>
+    </div>
+    <form [formGroup]="filtersForm" class="flex items-center" (submit)="onSubmit()">
+        @if(typeSearch === 'insuredId'){
+            <div class="mr-2">
+                <label for="insuredId" class="block poppins-regular"># Cédula</label>
+                <input type="text" formControlName="insuredId" class="border-2 p-2 rounded-lg" placeholder="Ej.: 0997867856">
+            </div>
+        }
+        @if(typeSearch === 'insuranceCode'){
+            <div class="mr-2">
+                <label for="insuranceCode" class="block poppins-regular">Código seguro</label>
+                <input type="text" formControlName="insuranceCode" class="border-2 p-2 rounded-lg" placeholder="Ej.: insu3">
+            </div>
+        }
+        @if(typeSearch === 'insuredId' || typeSearch === "insuranceCode"){
+            <button class="rounded-lg bg-cyan-900 size-8 mr-2" type="submit">
+                <mat-icon class="text-white">
+                    search
+                </mat-icon>
+            </button>
+            <!-- <button class="rounded-lg bg-cyan-900 size-8" (click)="getAllInsuredInsuranList()">
+                <mat-icon class="text-white">
+                    restart_alt
+                </mat-icon>
+            </button> -->
+        }
+    </form>
+</div>
+

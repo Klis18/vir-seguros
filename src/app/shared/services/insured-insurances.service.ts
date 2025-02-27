@@ -45,6 +45,7 @@ export class InsuredInsurancesService {
     }
   ];
 
+
   constructor() { }
 
   getListInsurancesInsuredAssignments():InsurancesInsured[]{
@@ -54,7 +55,7 @@ export class InsuredInsurancesService {
   assignInsurance(insurancesInsured:InsurancesInsured){
     this.insuredInsurancesList.push(insurancesInsured);
   }
-  
+
   updateStatusInsuranceInsured(insuranceInsuredId:string){
     const index = this.insuredInsurancesList.findIndex(register => register.id === insuranceInsuredId );
     if(index!==-1){
@@ -63,12 +64,18 @@ export class InsuredInsurancesService {
   }
 
   getListInsurancesInsuredByInsuredId(insuredId: string){
-    this.insuredInsurancesList = this.insuredInsurancesList.filter(register => register.insuredId === insuredId);
+    const filteredData = this.insuredInsurancesList.filter(register => register.insuredId === insuredId);
+    console.log('Datos obtenidos desde servicio', insuredId, filteredData);
+    return filteredData;
   }
 
   getListInsuredInsurancesByInsuranceCode(insuranceCode: string){
-    this.insuredInsurancesList = this.insuredInsurancesList.filter(register => register.insuranceCode === insuranceCode);
+    const filteredData = this.insuredInsurancesList.filter(register => register.insuranceCode === insuranceCode);
+    return filteredData;
   }
 
-  
+  // getListFiltered(insuredId: string, insuranceCode:string){
+  //   const filteredData = this.insuredInsurancesList.filter(register => register.insuredId === insuredId || register.insuranceCode === insuranceCode);
+  //   return filteredData;
+  // }
 }

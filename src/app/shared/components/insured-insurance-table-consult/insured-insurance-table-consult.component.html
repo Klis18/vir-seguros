@@ -1,0 +1,30 @@
+<table class="w-full text-center">
+    <thead>
+        <tr class="bg-cyan-900 text-white">
+            <td class="py-2">Id</td>
+            <td>Cédula</td>
+            <td>Nombre del Asegurado</td>
+            <td>Teléfono</td>
+            <td>Edad</td>
+            <td>Código Seguro</td>
+            <td>Nombre del seguro</td>
+            <td>Suma asegurada</td>
+            <td>Prima de seguros</td>
+        </tr>
+    </thead>
+    <tbody>
+        @for(register of insuredInsuranceFilteredList; track register){
+            <tr class="border-b-2">
+                <td class="py-4">{{register.id}}</td>
+                <td>{{register.insuredId}}</td>
+                <td>{{register.insuredName}}</td>
+                <td>{{register.phone}}</td>
+                <td>{{register.age}}</td>
+                <td>{{register.insuranceCode}}</td>
+                <td>{{register.insuranceName}}</td>
+                <td>{{register.sumInsured}}</td>
+                <td>{{register.insuranceCost}}</td>
+            </tr>
+        }
+    </tbody>
+</table>
