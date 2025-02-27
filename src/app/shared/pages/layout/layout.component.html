@@ -1,15 +1,22 @@
-<div class="w-full bg-cyan-900 h-16 relative text-white">
-    <div class="absolute left-0 px-4">
-        <p class="text-3xl">VIR</p>
-        <p class="text-sm">Seguros</p>
-    </div>
+<div class="w-full bg-cyan-900 text-white flex items-center py-4 pl-4">
+        <div class="mr-2 cursor-pointer" (click)="showMenu()">
+            <mat-icon>
+                menu
+            </mat-icon>
+        </div>
+        <div>
+            <p class="text-2xl">Seguros VIR</p>
+        </div>
 </div>
-<div class="grid grid-cols-6">
-    <div class="h-screen col-span-1 bg-cyan-800 pt-4">
-        <app-menu></app-menu>
-    </div>
+<div class="flex">
 
-    <div class="col-span-5 px-8 py-4">
+    @if(menuVisible === true){
+        <div class="h-screen w-fit bg-cyan-800 pt-4">
+            <app-menu></app-menu>
+        </div>
+    }
+
+    <div class="w-full px-8 py-4">
         <router-outlet></router-outlet>
     </div>
 </div>
