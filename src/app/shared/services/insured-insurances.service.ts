@@ -49,11 +49,16 @@ export class InsuredInsurancesService {
   constructor() { }
 
   getListInsurancesInsuredAssignments():InsurancesInsured[]{
+    const insuredInsuranceDataLocalStorage = localStorage.getItem('insuredInsurancesList');
+    if(insuredInsuranceDataLocalStorage){
+      this.insuredInsurancesList = JSON.parse(insuredInsuranceDataLocalStorage);
+    }
     return this.insuredInsurancesList;
   }
 
   assignInsurance(insurancesInsured:InsurancesInsured){
     this.insuredInsurancesList.push(insurancesInsured);
+    this.saveInLocalStorage();
   }
 
   updateStatusInsuranceInsured(insuranceInsuredId:string){
@@ -61,6 +66,7 @@ export class InsuredInsurancesService {
     if(index!==-1){
       this.insuredInsurancesList[index].state = 'Inactive';
     }
+    this.saveInLocalStorage();
   }
 
   getListInsurancesInsuredByInsuredId(insuredId: string){
@@ -74,8 +80,8 @@ export class InsuredInsurancesService {
     return filteredData;
   }
 
-  // getListFiltered(insuredId: string, insuranceCode:string){
-  //   const filteredData = this.insuredInsurancesList.filter(register => register.insuredId === insuredId || register.insuranceCode === insuranceCode);
-  //   return filteredData;
-  // }
+  saveInLocalStorage(){
+    localStorage.setItem('insuredInsurancesList',JSON.stringify(this.insuredInsurancesList));
+  }
+
 }

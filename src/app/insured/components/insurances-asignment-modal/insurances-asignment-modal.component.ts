@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { InsuredInsurancesService } from '../../../shared/services/insured-insurances.service';
 import { SelectInsuredComponent } from '../select-insured/select-insured.component';
 import { Insured } from '../../interfaces/insured.interface';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-insurances-asignment-modal',
@@ -29,11 +30,10 @@ export class InsurancesAsignmentModalComponent implements OnInit{
   public insuranceSelectedData!: Insurance;
   public insuredSelectedData!: Insured;
 
-
   public dialogRef = inject(MatDialogRef<InsurancesAsignmentModalComponent>);
 
   constructor(private insurancesService: InsurancesService, 
-              private insuranInsuredService: InsuredInsurancesService,
+              private insuranceInsuredService: InsuredInsurancesService,
               private dialog: MatDialog){}
 
   ngOnInit(): void {
@@ -68,14 +68,15 @@ export class InsurancesAsignmentModalComponent implements OnInit{
 
   saveInsuranceAssignment(){
     this.getInsuranceSelectedByCode();
+    const shortId = uuidv4().substring(0,4);
     const assignmentData = {
-      id: 'reg20',
-      state: 'Active',
+      id: 'reg-'+shortId,
+      ...this.insuranceSelectedData,
       ...this.insuredSelectedData,
-      ...this.insuranceSelectedData
+      state: 'Active'
     }
     console.log('Asignación a guardar', assignmentData);
-    this.insuranInsuredService.assignInsurance(assignmentData);
+    this.insuranceInsuredService.assignInsurance(assignmentData);
     this.closeModal();
   }
 
