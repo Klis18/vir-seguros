@@ -1,15 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { InsuredInsurancesService } from '../../services/insured-insurances.service';
 import { InsurancesInsured } from '../../interfaces/insured-insurances.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-insured-insurance-table-consult',
   standalone: true,
   imports: [
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule
   ],
   templateUrl: './insured-insurance-table-consult.component.html',
   styles: ``

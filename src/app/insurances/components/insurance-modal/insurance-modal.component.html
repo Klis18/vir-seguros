@@ -7,10 +7,12 @@
     <p class="text-2xl">{{typeForm}} Seguro</p>
     <hr>
     <form [formGroup]="insuranceForm" class="grid grid-cols-2 gap-4 mt-5" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="insuranceCode" class="block">Código seguro</label>
-            <input type="text" formControlName="insuranceCode" placeholder="insu4" class="border-2 px-2 py-2 w-full rounded-lg">
-        </div>
+        @if(typeForm === 'Editar'){
+            <div>
+                <label for="insuranceCode" class="block">Código seguro</label>
+                <input type="text" formControlName="insuranceCode" placeholder="insu4" class="border-2 px-2 py-2 w-full rounded-lg" readonly>
+            </div>
+        }
         <div>
             <label for="insuranceName" class="block">Nombre seguro</label>
             <input type="text" formControlName="insuranceName" placeholder="Seguro Premium" class="border-2 px-2 py-2 w-full rounded-lg">

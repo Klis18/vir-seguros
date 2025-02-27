@@ -40,35 +40,18 @@ export class InsuredInsuranceFiltersConsultComponent implements OnInit{
     const insuranceCode = this.filtersForm.get('insuranceCode')?.value;
     switch(this.typeSearch){
       case 'insuredId':
-        this.filterInsuranceInsuredByInsuredId(insuredId);
-        this.sendFilteredData.emit(this.filteredList);
+        const filteredDataByInsuredId = this.insuredInsuranceService.getListInsurancesInsuredByInsuredId(insuredId);
+        this.sendFilteredData.emit(filteredDataByInsuredId);
         break;
       case 'insuranceCode':
-        this.filterInsuredInsuranceByInsuranceCode(insuranceCode);
-        this.sendFilteredData.emit(this.filteredList);
+        const filteredDataByInsuranceCode = this.insuredInsuranceService.getListInsuredInsurancesByInsuranceCode(insuranceCode);
+        this.sendFilteredData.emit(filteredDataByInsuranceCode);
         break;
       default:
         ''
         break;
     }
 
-  }
-
-  filterInsuranceInsuredByInsuredId(insuredId: string){
-    console.log('Dato asegurado obtenido', insuredId);
-    this.filteredList = this.insuredInsuranceService.getListInsurancesInsuredByInsuredId(insuredId);
-    console.log('Lista filtrada por id de asegurado', this.filteredList);
-  }
-
-  filterInsuredInsuranceByInsuranceCode(insuranceCode: string){
-    console.log('Dato seguro obtenido', insuranceCode);
-    this.filteredList = this.insuredInsuranceService.getListInsuredInsurancesByInsuranceCode(insuranceCode);
-    console.log('Lista filtrada por código de seguro', this.filteredList);
-  }
-
-
-  getAllInsuredInsuranList(){
-    this.insuredInsuranceService.getListInsurancesInsuredAssignments();
   }
 
 

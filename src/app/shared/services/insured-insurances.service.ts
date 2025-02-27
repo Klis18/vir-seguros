@@ -71,7 +71,6 @@ export class InsuredInsurancesService {
 
   getListInsurancesInsuredByInsuredId(insuredId: string){
     const filteredData = this.insuredInsurancesList.filter(register => register.insuredId === insuredId);
-    console.log('Datos obtenidos desde servicio', insuredId, filteredData);
     return filteredData;
   }
 

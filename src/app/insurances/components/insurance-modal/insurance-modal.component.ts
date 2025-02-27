@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { InsurancesService } from '../../services/insurances.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-insurance-modal',
@@ -55,7 +56,10 @@ export class InsuranceModalComponent implements OnInit{
 
 
   addNewInsurance(){
-    this.insuranceService.addInsurance(this.insuranceForm.value);
+    const insuranceCode = 'insu-'+uuidv4().substring(0,4);
+    const{insuranceName, sumInsured, insuranceCost} = this.insuranceForm.value;
+    const newInsurance = {insuranceCode, insuranceName, sumInsured,insuranceCost};
+    this.insuranceService.addInsurance(newInsurance);
     this.closeForm();
   }
 

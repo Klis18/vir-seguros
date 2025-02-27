@@ -15,16 +15,17 @@
       <label for="id" class="block">Cédula</label>
       <input
         type="text"
-        formControlName="id"
+        formControlName="insuredId"
         class="px-2 py-2 w-full rounded-lg border-2"
         placeholder="0997867567"
+        [readOnly]="typeForm === 'Editar'"
       />
     </div>
     <div>
       <label for="name" class="block">Nombre</label>
       <input
         type="text"
-        formControlName="name"
+        formControlName="insuredName"
         class="px-2 py-2 w-full rounded-lg border-2"
         placeholder="Margarita Hernán"
       />

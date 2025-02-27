@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { InsuredService } from '../../services/insured.service';
@@ -26,10 +26,10 @@ export class InsuredModalComponent implements OnInit{
 
   ngOnInit(): void {
     this.insuredForm = this.fb.group({
-      id : [''],
-      name:[''],
-      phone:[''],
-      age:['']
+      insuredId : ['', [Validators.required, Validators.minLength(10)]],
+      insuredName:['', [Validators.required]],
+      phone:['', [Validators.required]],
+      age:['', [Validators.required]]
     });
 
     this.data.type == 'edit' ? this.typeForm = 'Editar' : this.typeForm = 'Agregar';
