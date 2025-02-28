@@ -44,8 +44,6 @@ export class InsurancesAsignmentModalComponent implements OnInit{
     this.insurancesList = this.insurancesService.getInsurances();
   }
 
-  
-  
   openInsuredList(){
     const dialogRef = this.dialog.open(SelectInsuredComponent,
       {
@@ -64,6 +62,13 @@ export class InsurancesAsignmentModalComponent implements OnInit{
   getInsuranceSelectedByCode():Insurance{
     this.insuranceSelectedData = this.insurancesService.getInsuranceByCode(this.insuranceSelectedCode);
     return this.insuranceSelectedData;
+  }
+
+  verifyEmptyFormValues(){
+    if(this.insuredSelectedName !== '' && this.insuranceSelectedCode !== ''){
+      return true;
+    }
+    return false;
   }
 
   saveInsuranceAssignment(){
