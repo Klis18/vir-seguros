@@ -20,6 +20,9 @@
         placeholder="0997867567"
         [readOnly]="typeForm === 'Editar'"
       />
+      @if(verifyError('insuredId')){
+        <span class="text-red-500 text-xs">{{showFormsErrorMessages('insuredId')}}</span>
+      }
     </div>
     <div>
       <label for="name" class="block">Nombre</label>
@@ -29,6 +32,9 @@
         class="px-2 py-2 w-full rounded-lg border-2"
         placeholder="Margarita Hernán"
       />
+      @if(verifyError('insuredName')){
+        <span class="text-red-500 text-xs">{{showFormsErrorMessages('insuredName')}}</span>
+      }
     </div>
     <div>
       <label for="phone" class="block">Teléfono</label>
@@ -38,6 +44,9 @@
         class="px-2 py-2 w-full rounded-lg border-2"
         placeholder="0977656452"
       />
+      @if(verifyError('phone')){
+        <span class="text-red-500 text-xs">{{showFormsErrorMessages('phone')}}</span>
+      }
     </div>
     <div>
       <label for="age" class="block">Edad</label>
@@ -47,17 +56,22 @@
         class="px-2 py-2 w-full rounded-lg border-2"
         placeholder="28"
       />
+      @if(verifyError('age')){
+        <span class="text-red-500 text-xs">{{showFormsErrorMessages('age')}}</span>
+      }
     </div>
 
     <div class="relative col-span-2">
       <div class="absolute right-0 flex">
-        <button
-          class="bg-cyan-900 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg mr-2"
-          type="submit"
-        >
-          <mat-icon class="mr-2"> save </mat-icon>
-          <span> Guardar </span>
-        </button>
+        @if(insuredForm.valid){
+          <button
+            class="bg-cyan-900 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg mr-2"
+            type="submit"
+          >
+            <mat-icon class="mr-2"> save </mat-icon>
+            <span> Guardar </span>
+          </button>
+        }
         <button class="bg-slate-800 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg" (click)="closeForm()">
             Cancelar
         </button>
