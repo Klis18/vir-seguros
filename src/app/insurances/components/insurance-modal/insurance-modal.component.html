@@ -16,27 +16,37 @@
         <div>
             <label for="insuranceName" class="block">Nombre seguro</label>
             <input type="text" formControlName="insuranceName" placeholder="Seguro Premium" class="border-2 px-2 py-2 w-full rounded-lg">
+            @if(verifyFormErrors('insuranceName')){
+                <span class="text-red-500 text-xs">{{showFormAlertMessage('insuranceName')}}</span>
+            }
         </div>
         <div>
             <label for="sumInsured" class="block">Suma asegurada</label>
             <input type="text" formControlName="sumInsured" placeholder="1000" class="border-2 px-2 py-2 w-full rounded-lg">
+            @if(verifyFormErrors('sumInsured')){
+                <span class="text-red-500 text-xs">{{showFormAlertMessage('sumInsured')}}</span>
+            }
         </div>
         <div>
             <label for="insuranceCost" class="block">Prima</label>
             <input type="text" formControlName="insuranceCost" placeholder="300" class="border-2 px-2 py-2 w-full rounded-lg">
+            @if(verifyFormErrors('insuranceCost')){
+                <span class="text-red-500 text-xs">{{showFormAlertMessage('insuranceCost')}}</span>
+            }
         </div>
 
         <div class="relative col-span-2">
             <div class="absolute right-0 flex">
-
-                <button class="bg-cyan-900 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg mr-2" type="submit">
-                    <mat-icon class="mr-2">
-                        save
-                    </mat-icon>
-                    <span>
-                        Guardar
-                    </span>
-                </button>
+                @if(insuranceForm.valid){
+                    <button class="bg-cyan-900 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg mr-2" type="submit">
+                        <mat-icon class="mr-2">
+                            save
+                        </mat-icon>
+                        <span>
+                            Guardar
+                        </span>
+                    </button>
+                }
                 <button class="bg-slate-800 text-white flex items-center justify-center px-4 py-2 my-4 w-fit rounded-lg" (click)="closeForm()">
                     Cancelar
                 </button>

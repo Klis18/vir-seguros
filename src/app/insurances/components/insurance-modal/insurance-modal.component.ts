@@ -1,5 +1,5 @@
 import { Component, inject, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { InsurancesService } from '../../services/insurances.service';
@@ -27,26 +27,24 @@ export class InsuranceModalComponent implements OnInit{
   ngOnInit(): void {
     this.insuranceForm = this.fb.group({
       insuranceCode:[''],
-      insuranceName:[''],
-      sumInsured:[],
-      insuranceCost:[],
+      insuranceName:['', [Validators.required, Validators.minLength(4)]],
+      sumInsured:[0, [Validators.required, Validators.min(20)]],
+      insuranceCost:[0, [Validators.required, Validators.min(30)]],
     })
-
-    console.log(this.typeForm);
 
     this.data.type == 'edit'? this.typeForm = 'Editar' : this.typeForm = 'Agregar';
 
-    console.log('insuranceCode: ', this.data.insuranceCode);
-
     const dataInsurance = this.insuranceService.getInsuranceByCode(this.data.insuranceCode);
-    console.log(dataInsurance);
 
     this.data.type == 'edit'? this.insuranceForm.setValue(dataInsurance) : '';
 
   }
 
   onSubmit(){
-    this.data.type == 'edit'? this.editInsurance() : this.addNewInsurance();
+    if(this.insuranceForm.valid){
+      this.data.type == 'edit'? this.editInsurance() : this.addNewInsurance();
+    }
+    console.log('Formulario invalido')
   }
 
   editInsurance(){
@@ -69,6 +67,34 @@ export class InsuranceModalComponent implements OnInit{
 
   closeForm(){
     this.dialogRef.close()
+  }
+
+  verifyFormErrors(campoName:string):boolean{
+    if(this.insuranceForm.get(campoName)?.touched && this.insuranceForm.get(campoName)?.invalid) {
+      return true;
+    } 
+    return false;
+  }
+
+  showFormAlertMessage(campoName: string){
+    const controlForm = this.insuranceForm.get(campoName);
+    if (!controlForm) return '';
+
+    const errors = controlForm.errors;
+
+    const errorsMessage:any = {
+      required : 'Este campo es obligatorio',
+      minlength : `El mínimo de caracteres es ${errors?.['minlength']?.requiredLength}` ,
+      maxlength : `El máximo de caracteres es ${errors?.['maxlength']?.requiredLength}` ,
+      min: `El valor debe ser mayor a ${errors?.['min']?.min}`
+    }
+    
+    for(const error in controlForm.errors){
+      if(controlForm.errors.hasOwnProperty(error)){
+        return errorsMessage[error] || 'Error desconocido';
+      }
+      return '';
+    }
   }
 
 }
