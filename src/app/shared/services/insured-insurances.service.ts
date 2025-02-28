@@ -70,12 +70,12 @@ export class InsuredInsurancesService {
   }
 
   getListInsurancesInsuredByInsuredId(insuredId: string){
-    const filteredData = this.insuredInsurancesList.filter(register => register.insuredId === insuredId);
+    const filteredData = this.insuredInsurancesList.filter(register => register.insuredId === insuredId.trim());
     return filteredData;
   }
 
   getListInsuredInsurancesByInsuranceCode(insuranceCode: string){
-    const filteredData = this.insuredInsurancesList.filter(register => register.insuranceCode === insuranceCode);
+    const filteredData = this.insuredInsurancesList.filter(register => register.insuranceCode === insuranceCode.trim());
     return filteredData;
   }
 

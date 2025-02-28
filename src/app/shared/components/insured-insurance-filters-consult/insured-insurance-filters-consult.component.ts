@@ -51,8 +51,8 @@ export class InsuredInsuranceFiltersConsultComponent implements OnInit{
         ''
         break;
     }
-
   }
+
 
 
 }
