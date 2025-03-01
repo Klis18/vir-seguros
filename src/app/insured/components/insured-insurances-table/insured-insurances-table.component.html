@@ -1,5 +1,5 @@
-<div class="py-8">
-    @if(insuranceInsuredData.length >= 0){
+@if(insuranceInsuredData.length >= 0){
+    <div class="overflow-x-auto max-w-full">
         <table class="w-full text-center">
             <thead>
                 <tr class="bg-cyan-900 text-white">
@@ -32,29 +32,31 @@
                 }
             </tbody>
         </table>
-        <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 px-2 flex justify-end items-center">
-            @if(currentPage > 1){
-        
-                <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
-                    <mat-icon>
-                        chevron_left
-                    </mat-icon>
-                </button>
-            }
-                <span>Página </span>
-                    <input  type="number" 
-                            [(ngModel)]="currentPage" 
-                            (change)="changePage(currentPage)"
-                            [min]="1"
-                            [max]="totalPages" 
-                            class="rounded-lg border-2 size-8 text-center"
-                    />
-                <span> de {{totalPages}}</span>
-                <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
-                    <mat-icon>
-                        chevron_right
-                    </mat-icon>
-                </button>
-        </div>
-    }
-</div>
+        @if(totalPages >=1){
+            <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 w-full px-2 flex justify-end items-center">
+                @if(currentPage > 1){
+            
+                    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
+                        <mat-icon>
+                            chevron_left
+                        </mat-icon>
+                    </button>
+                }
+                    <span>Página </span>
+                        <input  type="number" 
+                                [(ngModel)]="currentPage" 
+                                (change)="changePage(currentPage)"
+                                [min]="1"
+                                [max]="totalPages" 
+                                class="rounded-lg border-2 size-8 text-center"
+                        />
+                    <span> de {{totalPages}}</span>
+                    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
+                        <mat-icon>
+                            chevron_right
+                        </mat-icon>
+                    </button>
+            </div>
+        }
+    </div>
+}

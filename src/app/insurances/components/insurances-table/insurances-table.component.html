@@ -1,57 +1,60 @@
 
 @if(insurances.length>=0){
-    <table class="w-full">
-        <thead class="bg-cyan-900 text-white text-center">
-            <tr class="poppins-regular">
-                <td class="p-2">Acciones</td>
-                <td>Id</td>
-                <td>Nombre seguro</td>
-                <td>Suma asegurada</td>
-                <td>Prima</td>
-            </tr>
-        </thead>
-        <tbody class="poppins-light text-center">
-            @for(insurance of getPageData(); track insurance){
-                <tr>
-                    <td class="py-2">
-                        <mat-icon class="mr-4 text-blue-900" (click)="editInsurance(insurance.insuranceCode)">
-                            edit
-                        </mat-icon>
-                        <mat-icon class="text-red-900 cursor-pointer" (click)="deleteInsurance(insurance.insuranceCode)">
-                            delete
-                        </mat-icon>
-                    </td>
-                    <td>{{insurance.insuranceCode}}</td>
-                    <td>{{insurance.insuranceName}}</td>
-                    <td>{{insurance.sumInsured | currency}}</td>
-                    <td>{{insurance.insuranceCost | currency}}</td>
+    <div class="overflow-x-auto max-w-full">
+        <table class="w-full table-auto">
+            <thead class="bg-cyan-900 text-white text-center">
+                <tr class="poppins-regular">
+                    <td class="p-2">Acciones</td>
+                    <td>Id</td>
+                    <td>Nombre seguro</td>
+                    <td>Suma asegurada</td>
+                    <td>Prima</td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    
-    <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 px-2 flex justify-end items-center">
-        @if(currentPage > 1){
-    
-            <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
-                <mat-icon>
-                    chevron_left
-                </mat-icon>
-            </button>
+            </thead>
+            <tbody class="poppins-light text-center">
+                @for(insurance of getPageData(); track insurance){
+                    <tr>
+                        <td class="py-2">
+                            <mat-icon class="mr-4 text-blue-900 cursor-pointer" (click)="editInsurance(insurance.insuranceCode)">
+                                edit
+                            </mat-icon>
+                            <mat-icon class="text-red-900 cursor-pointer mr-4" (click)="deleteInsurance(insurance.insuranceCode)">
+                                delete
+                            </mat-icon>
+                        </td>
+                        <td>{{insurance.insuranceCode}}</td>
+                        <td>{{insurance.insuranceName}}</td>
+                        <td>{{insurance.sumInsured | currency}}</td>
+                        <td>{{insurance.insuranceCost | currency}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if(totalPages >=1){
+            <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 px-2 flex justify-end items-center w-full">
+                @if(currentPage > 1){
+            
+                    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
+                        <mat-icon>
+                            chevron_left
+                        </mat-icon>
+                    </button>
+                }
+                    <span>Página </span>
+                        <input  type="number" 
+                                [(ngModel)]="currentPage" 
+                                (change)="changePage(currentPage)"
+                                [min]="1"
+                                [max]="totalPages" 
+                                class="rounded-lg border-2 size-8 text-center"
+                        />
+                    <span> de {{totalPages}}</span>
+                    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
+                        <mat-icon>
+                            chevron_right
+                        </mat-icon>
+                    </button>
+            </div>
         }
-            <span>Página </span>
-                <input  type="number" 
-                        [(ngModel)]="currentPage" 
-                        (change)="changePage(currentPage)"
-                        [min]="1"
-                        [max]="totalPages" 
-                        class="rounded-lg border-2 size-8 text-center"
-                />
-            <span> de {{totalPages}}</span>
-            <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
-                <mat-icon>
-                    chevron_right
-                </mat-icon>
-            </button>
     </div>
 }

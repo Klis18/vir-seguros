@@ -1,2 +1,5 @@
-<label for="fileInsurances">Carga masiva de seguros: </label>
-<input type="file" (change)="readTxt($event)" class="w-1/3 border-2 rounded-lg">
+<div>
+    <label for="fileInsurances" class="block poppins-regular mb-2">Carga masiva de seguros: </label>
+    <input type="file" (change)="readTxt($event)" class="block w-fit text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50">
+    <p class="text-xs text-slate-500 px-2">Formato permitido: .txt</p>
+</div>

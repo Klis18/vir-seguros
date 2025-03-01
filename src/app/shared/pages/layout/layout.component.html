@@ -1,22 +1,20 @@
-<div class="w-full bg-cyan-900 text-white flex items-center py-4 pl-4">
-        <div class="mr-2 cursor-pointer" (click)="showMenu()">
-            <mat-icon>
-                menu
-            </mat-icon>
-        </div>
-        <div>
-            <p class="text-2xl">Seguros VIR</p>
-        </div>
-</div>
-<div class="flex">
-
-    @if(menuVisible === true){
-        <div class="h-screen w-fit bg-cyan-800 pt-4">
-            <app-menu></app-menu>
-        </div>
-    }
-
-    <div class="w-full px-8 py-4">
-        <router-outlet></router-outlet>
+<div class="example-container" [class.example-is-mobile]="isMobile()">
+    <div class="bg-cyan-900 text-white flex items-center py-2 pl-2">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <span class="text-2xl">Responsive App</span>
     </div>
-</div>
+
+    <mat-sidenav-container class="h-screen"
+                          [style.marginTop.px]="isMobile() ? 56 : 0">
+      <mat-sidenav #snav [mode]="isMobile() ? 'over' : 'over'"
+                  [fixedInViewport]="isMobile()" fixedTopGap="56">
+        <mat-nav-list class="bg-cyan-800 h-full">
+         <app-menu></app-menu>
+        </mat-nav-list>
+      </mat-sidenav>
+
+      <mat-sidenav-content class="h-full px-4 pt-4 pb-2 md:px-8 md:pt-6 md:pb-4 lg:px-8 lg:pt-6 lg:pb-4">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

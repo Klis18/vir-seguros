@@ -8,26 +8,26 @@
     <hr>
     <form [formGroup]="insuranceForm" class="grid grid-cols-2 gap-4 mt-5" (ngSubmit)="onSubmit()">
         @if(typeForm === 'Editar'){
-            <div>
+            <div class="col-span-2 md:col-span-1 lg:col-span-1">
                 <label for="insuranceCode" class="block">Código seguro</label>
                 <input type="text" formControlName="insuranceCode" placeholder="insu4" class="border-2 px-2 py-2 w-full rounded-lg" readonly>
             </div>
         }
-        <div>
+        <div class="col-span-2 md:col-span-1 lg:col-span-1">
             <label for="insuranceName" class="block">Nombre seguro</label>
             <input type="text" formControlName="insuranceName" placeholder="Seguro Premium" class="border-2 px-2 py-2 w-full rounded-lg">
             @if(verifyFormErrors('insuranceName')){
                 <span class="text-red-500 text-xs">{{showFormAlertMessage('insuranceName')}}</span>
             }
         </div>
-        <div>
+        <div class="col-span-2 md:col-span-1 lg:col-span-1">
             <label for="sumInsured" class="block">Suma asegurada</label>
             <input type="text" formControlName="sumInsured" placeholder="1000" class="border-2 px-2 py-2 w-full rounded-lg">
             @if(verifyFormErrors('sumInsured')){
                 <span class="text-red-500 text-xs">{{showFormAlertMessage('sumInsured')}}</span>
             }
         </div>
-        <div>
+        <div class="col-span-2 md:col-span-1 lg:col-span-1">
             <label for="insuranceCost" class="block">Prima</label>
             <input type="text" formControlName="insuranceCost" placeholder="300" class="border-2 px-2 py-2 w-full rounded-lg">
             @if(verifyFormErrors('insuranceCost')){

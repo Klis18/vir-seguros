@@ -15,7 +15,6 @@ export class MassLoadingInsurancesComponent {
 
   addMassiveInsurances(insurance:Insurance){
     this.insurancesService.addInsurance(insurance);
-    console.log('Datos cargados masivamente',insurance);
   }
 
   readTxt(event:any):void{
@@ -40,14 +39,12 @@ export class MassLoadingInsurancesComponent {
             const insuranceData = {insuranceCode,insuranceName, sumInsured ,insuranceCost}
             this.addMassiveInsurances(insuranceData);
           }else{
-            console.log(`La linea ${index + 1} no tiene 4 columnas`)
           }
         });
       };
 
       lector.readAsText(archivo);
     }else{
-      console.log('no se pudo leer el archivo');
     }
 
 

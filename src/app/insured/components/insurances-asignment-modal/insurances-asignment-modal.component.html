@@ -7,15 +7,15 @@
     <p class="text-2xl">Asignar Seguros a Asegurados</p>
     <hr>
 
-    <div class="flex mt-6 gap-6">
-        <div>
+    <div class="grid grid-cols-2 mt-6 gap-6">
+        <div class="col-span-2 md:col-span-1 lg:col-span-1">
             <label for="insured" class="block">Asegurado</label>
             <div class="flex items-center">
                 <input type="text" readonly class="w-fit p-2 border-2 rounded-lg mr-2" [(ngModel)]="insuredSelectedName">
                 <button class="p-2 bg-cyan-900 text-center rounded-lg text-white" (click)="openInsuredList()">Seleccionar Asegurado</button>
             </div>
         </div>
-        <div>
+        <div class="col-span-2 md:col-span-1 lg:col-span-1">
             <label for="insurance" class="block">Seguro</label>
             <select name="insurance" id="insurance" class="p-2 border-2 rounded-lg w-full" [(ngModel)]="insuranceSelectedCode">
                 <option value="">--Selecciona un seguro--</option>

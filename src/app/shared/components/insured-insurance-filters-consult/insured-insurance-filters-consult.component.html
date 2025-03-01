@@ -1,4 +1,4 @@
-<div class="flex bg-cyan-50 p-8 rounded-lg shadow-lg">
+<div class="flex flex-wrap bg-cyan-50 p-8 rounded-lg shadow-lg">
     <div class="mr-2">
         <label for="typeSearch" class="block poppins-regular">Tipo de búsqueda</label>
         <select name="typeSearch" id="typeSearch" class="border-2 rounded-lg p-2" [(ngModel)]="typeSearch">
@@ -7,29 +7,28 @@
             <option value="insuranceCode">Código de seguro</option>
         </select>
     </div>
-    <div>
-        
+    <div> 
+        <form [formGroup]="filtersForm" class="flex items-center" (submit)="onSubmit()">
+            @if(typeSearch === 'insuredId'){
+                <div class="mr-2">
+                    <label for="insuredId" class="block poppins-regular"># Cédula</label>
+                    <input type="text" formControlName="insuredId" class="border-2 p-2 rounded-lg" placeholder="Ej.: 0967845654">
+                </div>
+            }
+            @if(typeSearch === 'insuranceCode'){
+                <div class="mr-2">
+                    <label for="insuranceCode" class="block poppins-regular">Código seguro</label>
+                    <input type="text" formControlName="insuranceCode" class="border-2 p-2 rounded-lg" placeholder="Ej.: insu3">
+                </div>
+            }
+            @if(typeSearch === 'insuredId' || typeSearch === "insuranceCode"){
+                <button class="rounded-lg bg-cyan-900 size-10 mr-2 flex items-center justify-center mt-4" type="submit">
+                    <mat-icon class="text-white">
+                        search
+                    </mat-icon>
+                </button>
+            }
+        </form>
     </div>
-    <form [formGroup]="filtersForm" class="flex items-center" (submit)="onSubmit()">
-        @if(typeSearch === 'insuredId'){
-            <div class="mr-2">
-                <label for="insuredId" class="block poppins-regular"># Cédula</label>
-                <input type="text" formControlName="insuredId" class="border-2 p-2 rounded-lg" placeholder="Ej.: 0967845654">
-            </div>
-        }
-        @if(typeSearch === 'insuranceCode'){
-            <div class="mr-2">
-                <label for="insuranceCode" class="block poppins-regular">Código seguro</label>
-                <input type="text" formControlName="insuranceCode" class="border-2 p-2 rounded-lg" placeholder="Ej.: insu3">
-            </div>
-        }
-        @if(typeSearch === 'insuredId' || typeSearch === "insuranceCode"){
-            <button class="rounded-lg bg-cyan-900 size-10 mr-2 flex items-center justify-center mt-4" type="submit">
-                <mat-icon class="text-white">
-                    search
-                </mat-icon>
-            </button>
-        }
-    </form>
 </div>
 

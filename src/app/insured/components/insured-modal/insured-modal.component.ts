@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { InsuredService } from '../../services/insured.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-insured-modal',
@@ -49,11 +51,13 @@ export class InsuredModalComponent implements OnInit{
   addInsured(){
     this.insuredService.addInsured(this.insuredForm.value);
     this.dialogRef.close();
+    this.showAlertMessage('guardado')
   }
 
   editInsured(){
     this.insuredService.updateInsured(this.insuredForm.value);
     this.dialogRef.close();
+    this.showAlertMessage('editado');
   }
 
   cleanForm(){
@@ -96,4 +100,13 @@ export class InsuredModalComponent implements OnInit{
       return '';
     }
   }
+
+    showAlertMessage(text:string){
+      Swal.fire({
+        title: 'Excelente!',
+        text: 'Se ha '+ text+' el registro exitosamente',
+        icon: 'success',
+        confirmButtonText: 'ok'
+      })
+    }
 }

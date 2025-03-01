@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { InsurancesService } from '../../services/insurances.service';
 import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-insurance-modal',
@@ -44,12 +45,12 @@ export class InsuranceModalComponent implements OnInit{
     if(this.insuranceForm.valid){
       this.data.type == 'edit'? this.editInsurance() : this.addNewInsurance();
     }
-    console.log('Formulario invalido')
   }
 
   editInsurance(){
     this.insuranceService.editInsurance(this.insuranceForm.value);
     this.closeForm()
+    this.showAlertMessage('actualizado');
   }
 
 
@@ -59,6 +60,7 @@ export class InsuranceModalComponent implements OnInit{
     const newInsurance = {insuranceCode, insuranceName, sumInsured,insuranceCost};
     this.insuranceService.addInsurance(newInsurance);
     this.closeForm();
+    this.showAlertMessage('guardado');
   }
 
   cleanForm(){
@@ -95,6 +97,15 @@ export class InsuranceModalComponent implements OnInit{
       }
       return '';
     }
+  }
+
+  showAlertMessage(text:string){
+    Swal.fire({
+      title: 'Excelente!',
+      text: 'Se ha '+ text+' el registro exitosamente',
+      icon: 'success',
+      confirmButtonText: 'ok'
+    })
   }
 
 }

@@ -1,2 +1,5 @@
-<label for="file" class="poppins-regular">Carga masiva de asegurados: </label>
-<input type="file" class="w-1/3 border-2 rounded-lg" (change)="readExcel($event)">
+<div>
+    <label for="file" class="block poppins-regular mb-2">Carga masiva de asegurados: </label>
+    <input type="file" class="block w-fit text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" (change)="readExcel($event)">
+    <p class="text-xs text-slate-500 px-2">Formato permitido: .xlsx</p>
+</div>

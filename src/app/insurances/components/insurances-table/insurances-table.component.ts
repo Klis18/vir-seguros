@@ -7,6 +7,8 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog'
 import { InsuranceModalComponent } from '../insurance-modal/insurance-modal.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-insurances-table',
@@ -46,6 +48,7 @@ export class InsurancesTableComponent implements OnInit{
 
   deleteInsurance(insuranceCode:string){
     this.insurancesService.deleteInsurance(insuranceCode);
+    this.showAlertMessage('eliminado');
     this.getListInsurance();
   }
 
@@ -61,11 +64,8 @@ export class InsurancesTableComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(res=>{
-      console.log('modal cerrado');
     })
   }
-
-
 
   getPageData(){
     const start = (this.currentPage - 1) * this.itemsPerPage;
@@ -80,5 +80,14 @@ export class InsurancesTableComponent implements OnInit{
       this.currentPage = 1;
     }
   }
+
+    showAlertMessage(text:string){
+      Swal.fire({
+        title: 'Excelente!',
+        text: 'Se ha '+ text+' el registro exitosamente',
+        icon: 'success',
+        confirmButtonText: 'ok'
+      })
+    }
 
 }
