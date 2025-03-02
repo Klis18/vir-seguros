@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { InsuredService } from '../../services/insured.service';
-import Swal from 'sweetalert2';
+import { AlertsService } from '../../../shared/services/alerts.service';
 
 
 @Component({
@@ -24,7 +24,9 @@ export class InsuredModalComponent implements OnInit{
     dialogRef = inject(MatDialogRef<InsuredModalComponent>);
   
 
-  constructor(private fb: FormBuilder, private insuredService: InsuredService){}
+  constructor(private fb: FormBuilder, 
+              private insuredService: InsuredService,
+              private alertService:AlertsService){}
 
   ngOnInit(): void {
     this.insuredForm = this.fb.group({
@@ -49,19 +51,23 @@ export class InsuredModalComponent implements OnInit{
   }
 
   addInsured(){
-    this.insuredService.addInsured(this.insuredForm.value);
-    this.dialogRef.close();
-    this.showAlertMessage('guardado')
+    try {
+      this.insuredService.addInsured(this.insuredForm.value);
+      this.closeForm();
+      this.alertService.showAlertSuccesMessage('agregado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('eliminado');
+    }
   }
 
   editInsured(){
-    this.insuredService.updateInsured(this.insuredForm.value);
-    this.dialogRef.close();
-    this.showAlertMessage('editado');
-  }
-
-  cleanForm(){
-    this.insuredForm.reset();
+    try {
+      this.insuredService.updateInsured(this.insuredForm.value);
+      this.closeForm();
+      this.alertService.showAlertSuccesMessage('editado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('editar');
+    }
   }
 
   closeForm(){
@@ -101,12 +107,4 @@ export class InsuredModalComponent implements OnInit{
     }
   }
 
-    showAlertMessage(text:string){
-      Swal.fire({
-        title: 'Excelente!',
-        text: 'Se ha '+ text+' el registro exitosamente',
-        icon: 'success',
-        confirmButtonText: 'ok'
-      })
-    }
 }

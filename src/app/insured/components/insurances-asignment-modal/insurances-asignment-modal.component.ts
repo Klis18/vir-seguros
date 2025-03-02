@@ -8,6 +8,7 @@ import { InsuredInsurancesService } from '../../../shared/services/insured-insur
 import { SelectInsuredComponent } from '../select-insured/select-insured.component';
 import { Insured } from '../../interfaces/insured.interface';
 import {v4 as uuidv4} from 'uuid';
+import { AlertsService } from '../../../shared/services/alerts.service';
 
 @Component({
   selector: 'app-insurances-asignment-modal',
@@ -22,19 +23,17 @@ import {v4 as uuidv4} from 'uuid';
 export class InsurancesAsignmentModalComponent implements OnInit{
 
   public insurancesList: Insurance[] = []
-
   public insuranceSelectedCode: string = '';
   public insuredSelectedId: string = '';
   public insuredSelectedName: string = '';
-
   public insuranceSelectedData!: Insurance;
   public insuredSelectedData!: Insured;
-
   public dialogRef = inject(MatDialogRef<InsurancesAsignmentModalComponent>);
 
   constructor(private insurancesService: InsurancesService, 
               private insuranceInsuredService: InsuredInsurancesService,
-              private dialog: MatDialog){}
+              private dialog: MatDialog,
+              private alertService:AlertsService){}
 
   ngOnInit(): void {
     this.getInsurancesList();
@@ -72,17 +71,21 @@ export class InsurancesAsignmentModalComponent implements OnInit{
   }
 
   saveInsuranceAssignment(){
-    this.getInsuranceSelectedByCode();
-    const shortId = uuidv4().substring(0,4);
-    const assignmentData = {
-      id: 'reg-'+shortId,
-      ...this.insuranceSelectedData,
-      ...this.insuredSelectedData,
-      state: 'Active'
+    try {
+      this.getInsuranceSelectedByCode();
+      const shortId = uuidv4().substring(0,4);
+      const assignmentData = {
+        id: 'reg-'+shortId,
+        ...this.insuranceSelectedData,
+        ...this.insuredSelectedData,
+        state: 'Activo'
+      }
+      this.insuranceInsuredService.assignInsurance(assignmentData);
+      this.closeModal();
+      this.alertService.showAlertSuccesMessage('guardado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('guardar');
     }
-    console.log('Asignación a guardar', assignmentData);
-    this.insuranceInsuredService.assignInsurance(assignmentData);
-    this.closeModal();
   }
 
   closeModal(){

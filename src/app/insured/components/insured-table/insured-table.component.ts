@@ -6,7 +6,7 @@ import { InsuredService } from '../../services/insured.service';
 import { Insured } from '../../interfaces/insured.interface';
 import { InsuredModalComponent } from '../insured-modal/insured-modal.component';
 import { FormsModule } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { AlertsService } from '../../../shared/services/alerts.service';
 
 
 @Component({
@@ -29,17 +29,16 @@ export class InsuredTableComponent implements OnInit {
   tableType: string = '';
 
   public insuredList!: Insured[]
+  public itemsPerPage!: number;
+  public currentPage!: number;
+  public totalPages !: number;
 
-  //Paginación
-  itemsPerPage!: number;
-  currentPage!: number;
-  totalPages !: number;
-
-  constructor(private insuredService: InsuredService, private dialog: MatDialog) { }
+  constructor(private insuredService: InsuredService, 
+              private dialog: MatDialog,
+              private alertService: AlertsService) { }
 
   ngOnInit(): void {
     this.getInsuredList();
-
     this.itemsPerPage = 5;
     this.currentPage = 1;
     this.totalPages = Math.ceil(this.insuredList.length / this.itemsPerPage);
@@ -54,9 +53,13 @@ export class InsuredTableComponent implements OnInit {
   }
 
   deleteInsured(insuredId: string) {
-    this.insuredService.deleteInsured(insuredId);
-    this.getInsuredList();
-    this.showAlertMessage('eliminado');
+    try {
+      this.insuredService.deleteInsured(insuredId);
+      this.getInsuredList();
+      this.alertService.showAlertSuccesMessage('eliminado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('eliminar');
+    }
   }
 
   editInsured(insuredId: string) {
@@ -71,7 +74,6 @@ export class InsuredTableComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log('Modal editar, cerrado')
     })
   }
 
@@ -89,15 +91,5 @@ export class InsuredTableComponent implements OnInit {
       this.currentPage = 1;
     }
   }
-
-  showAlertMessage(text: string) {
-    Swal.fire({
-      title: 'Excelente!',
-      text: 'Se ha ' + text + ' el registro exitosamente',
-      icon: 'success',
-      confirmButtonText: 'ok'
-    })
-  }
-
 
 }

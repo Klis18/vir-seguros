@@ -3,11 +3,14 @@ import { InsuredInsurancesService } from '../../../shared/services/insured-insur
 import { InsurancesInsured } from '../../../shared/interfaces/insured-insurances.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { AlertsService } from '../../../shared/services/alerts.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-insured-insurances-table',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     MatIconModule
   ],
@@ -17,18 +20,15 @@ import { FormsModule } from '@angular/forms';
 export class InsuredInsurancesTableComponent implements OnInit{
 
   public insuranceInsuredData!: InsurancesInsured[];
-
-    //Paginación
-    itemsPerPage!:number; 
-    currentPage!:number; 
-    totalPages !:number;
+  public  itemsPerPage!:number; 
+  public  currentPage!:number; 
+  public  totalPages !:number;
   
-
-  constructor(private insuredInsurancesService:InsuredInsurancesService){}
+  constructor(private insuredInsurancesService:InsuredInsurancesService, 
+              private alertService:AlertsService){}
 
   ngOnInit(){
     this.insuranceInsuredData = this.getInsuredInsuranceList();
-
     this.itemsPerPage = 5;
     this.currentPage = 1;
     this.totalPages = Math.ceil(this.insuranceInsuredData.length / this.itemsPerPage);
@@ -39,7 +39,12 @@ export class InsuredInsurancesTableComponent implements OnInit{
   }
 
   deleteInsuredInsurance(id:string){
-    this.insuredInsurancesService.updateStatusInsuranceInsured(id);
+    try {
+      this.insuredInsurancesService.updateStatusInsuranceInsured(id);
+      this.alertService.showAlertSuccesMessage('eliminado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('eliminar');
+    }
   }
 
   getPageData(){

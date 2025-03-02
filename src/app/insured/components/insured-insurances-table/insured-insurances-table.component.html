@@ -16,7 +16,7 @@
                 @for(register of getPageData(); track register){
                     <tr class="border-b-2">
                         <td>
-                            @if(register.state !== 'Inactive'){
+                            @if(register.state !== 'Inactivo'){
                                 <mat-icon class="text-red-800 cursor-pointer" (click)="deleteInsuredInsurance(register.id)">
                                     delete
                                 </mat-icon>
@@ -27,7 +27,7 @@
                         <td>{{register.insuredName}}</td>
                         <td>{{register.insuranceCode}}</td>
                         <td>{{register.insuranceName}}</td>
-                        <td>{{register.state}}</td>
+                        <td [ngClass]="{'text-green-700':register.state ==='Activo','text-red-800': register.state ==='Inactivo'}" class="poppins-semibold">{{register.state}}</td>
                     </tr>
                 }
             </tbody>

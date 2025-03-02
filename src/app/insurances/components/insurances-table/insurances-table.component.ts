@@ -7,7 +7,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog'
 import { InsuranceModalComponent } from '../insurance-modal/insurance-modal.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { AlertsService } from '../../../shared/services/alerts.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class InsurancesTableComponent implements OnInit{
   readonly dialog = inject(MatDialog);
 
 
-  constructor(private insurancesService: InsurancesService){}
+  constructor(private insurancesService: InsurancesService, private alertService: AlertsService){}
 
   //Paginación
   itemsPerPage!:number; 
@@ -47,9 +47,13 @@ export class InsurancesTableComponent implements OnInit{
   }
 
   deleteInsurance(insuranceCode:string){
-    this.insurancesService.deleteInsurance(insuranceCode);
-    this.showAlertMessage('eliminado');
-    this.getListInsurance();
+    try {
+      this.insurancesService.deleteInsurance(insuranceCode);
+      this.getListInsurance();
+      this.alertService.showAlertSuccesMessage('eliminado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('eliminar');
+    }
   }
 
   editInsurance(insuranceCode: string){
@@ -80,14 +84,5 @@ export class InsurancesTableComponent implements OnInit{
       this.currentPage = 1;
     }
   }
-
-    showAlertMessage(text:string){
-      Swal.fire({
-        title: 'Excelente!',
-        text: 'Se ha '+ text+' el registro exitosamente',
-        icon: 'success',
-        confirmButtonText: 'ok'
-      })
-    }
 
 }

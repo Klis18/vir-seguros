@@ -17,7 +17,7 @@ export class InsuredInsurancesService {
       insuredName: 'Roberto Sandoval',
       phone: '0998887675',
       age: '29',
-      state: 'Active'
+      state: 'Activo'
     },
     {
       id: 'reg2',
@@ -29,7 +29,7 @@ export class InsuredInsurancesService {
       insuredName: 'Laura Benavides',
       phone: '0992276765',
       age: '45',
-      state: 'Active'
+      state: 'Activo'
     },
     {
       id: 'reg3',
@@ -41,7 +41,7 @@ export class InsuredInsurancesService {
       insuredName: 'Roberto Sandoval',
       phone: '0998887675',
       age: '29',
-      state: 'Active'
+      state: 'Activo'
     }
   ];
 
@@ -64,7 +64,7 @@ export class InsuredInsurancesService {
   updateStatusInsuranceInsured(insuranceInsuredId:string){
     const index = this.insuredInsurancesList.findIndex(register => register.id === insuranceInsuredId );
     if(index!==-1){
-      this.insuredInsurancesList[index].state = 'Inactive';
+      this.insuredInsurancesList[index].state = 'Inactivo';
     }
     this.saveInLocalStorage();
   }

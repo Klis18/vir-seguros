@@ -1,10 +1,11 @@
-import { Component, inject, Inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { InsurancesService } from '../../services/insurances.service';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
+import { AlertsService } from '../../../shared/services/alerts.service';
 
 @Component({
   selector: 'app-insurance-modal',
@@ -24,7 +25,10 @@ export class InsuranceModalComponent implements OnInit{
 
   dialogRef = inject(MatDialogRef<InsuranceModalComponent>);
 
-  constructor(private fb: FormBuilder, private insuranceService:InsurancesService){}
+  constructor(private fb: FormBuilder, 
+              private insuranceService:InsurancesService,
+              private alertService:AlertsService){}
+
   ngOnInit(): void {
     this.insuranceForm = this.fb.group({
       insuranceCode:[''],
@@ -48,19 +52,27 @@ export class InsuranceModalComponent implements OnInit{
   }
 
   editInsurance(){
-    this.insuranceService.editInsurance(this.insuranceForm.value);
-    this.closeForm()
-    this.showAlertMessage('actualizado');
+    try {
+      this.insuranceService.editInsurance(this.insuranceForm.value);
+      this.closeForm()
+      this.alertService.showAlertSuccesMessage('editado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('editar');
+    }
   }
 
 
   addNewInsurance(){
-    const insuranceCode = 'insu-'+uuidv4().substring(0,4);
-    const{insuranceName, sumInsured, insuranceCost} = this.insuranceForm.value;
-    const newInsurance = {insuranceCode, insuranceName, sumInsured,insuranceCost};
-    this.insuranceService.addInsurance(newInsurance);
-    this.closeForm();
-    this.showAlertMessage('guardado');
+    try {
+      const insuranceCode = 'insu-'+uuidv4().substring(0,4);
+      const{insuranceName, sumInsured, insuranceCost} = this.insuranceForm.value;
+      const newInsurance = {insuranceCode, insuranceName, sumInsured,insuranceCost};
+      this.insuranceService.addInsurance(newInsurance);
+      this.closeForm();
+      this.alertService.showAlertSuccesMessage('agregado');
+    } catch (error) {
+      this.alertService.showAlertErrorMessage('agregar');
+    }
   }
 
   cleanForm(){
@@ -99,13 +111,6 @@ export class InsuranceModalComponent implements OnInit{
     }
   }
 
-  showAlertMessage(text:string){
-    Swal.fire({
-      title: 'Excelente!',
-      text: 'Se ha '+ text+' el registro exitosamente',
-      icon: 'success',
-      confirmButtonText: 'ok'
-    })
-  }
+
 
 }
