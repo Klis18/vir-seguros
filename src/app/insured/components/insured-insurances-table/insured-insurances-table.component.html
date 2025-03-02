@@ -3,60 +3,60 @@
         <table class="w-full text-center">
             <thead>
                 <tr class="bg-cyan-900 text-white">
-                    <td class="py-2">Acciones</td>
-                    <td>Id</td>
-                    <td>Cédula</td>
-                    <td>Asegurado</td>
-                    <td>Código seguro</td>
-                    <td>Seguro</td>
-                    <td>Estado</td>
+                    <td class="p-2">Acciones</td>
+                    <td class="p-2">Id</td>
+                    <td class="p-2">Cédula</td>
+                    <td class="p-2">Asegurado</td>
+                    <td class="p-2">Código seguro</td>
+                    <td class="p-2">Seguro</td>
+                    <td class="p-2">Estado</td>
                 </tr>
             </thead>
             <tbody>
                 @for(register of getPageData(); track register){
                     <tr class="border-b-2">
-                        <td>
+                        <td class="px-4 py-2">
                             @if(register.state !== 'Inactivo'){
                                 <mat-icon class="text-red-800 cursor-pointer" (click)="deleteInsuredInsurance(register.id)">
                                     delete
                                 </mat-icon>
                             }
                         </td>
-                        <td class="py-4">{{register.id}}</td>
-                        <td>{{register.insuredId}}</td>
-                        <td>{{register.insuredName}}</td>
-                        <td>{{register.insuranceCode}}</td>
-                        <td>{{register.insuranceName}}</td>
-                        <td [ngClass]="{'text-green-700':register.state ==='Activo','text-red-800': register.state ==='Inactivo'}" class="poppins-semibold">{{register.state}}</td>
+                        <td class="px-4 py-2">{{register.id}}</td>
+                        <td class="px-4 py-2">{{register.insuredId}}</td>
+                        <td class="px-4 py-2">{{register.insuredName}}</td>
+                        <td class="px-4 py-2">{{register.insuranceCode}}</td>
+                        <td class="px-4 py-2">{{register.insuranceName}}</td>
+                        <td [ngClass]="{'text-green-700':register.state ==='Activo','text-red-800': register.state ==='Inactivo'}" class="poppins-semibold px-4 py-2">{{register.state}}</td>
                     </tr>
                 }
             </tbody>
         </table>
-        @if(totalPages >=1){
-            <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 w-full px-2 flex justify-end items-center">
-                @if(currentPage > 1){
-            
-                    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
-                        <mat-icon>
-                            chevron_left
-                        </mat-icon>
-                    </button>
-                }
-                    <span>Página </span>
-                        <input  type="number" 
-                                [(ngModel)]="currentPage" 
-                                (change)="changePage(currentPage)"
-                                [min]="1"
-                                [max]="totalPages" 
-                                class="rounded-lg border-2 size-8 text-center"
-                        />
-                    <span> de {{totalPages}}</span>
-                    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
-                        <mat-icon>
-                            chevron_right
-                        </mat-icon>
-                    </button>
-            </div>
-        }
     </div>
+    @if(totalPages >=1){
+        <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 w-full px-2 flex justify-end items-center">
+            @if(currentPage > 1){
+        
+                <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
+                    <mat-icon>
+                        chevron_left
+                    </mat-icon>
+                </button>
+            }
+                <span>Página </span>
+                    <input  type="number" 
+                            [(ngModel)]="currentPage" 
+                            (change)="changePage(currentPage)"
+                            [min]="1"
+                            [max]="totalPages" 
+                            class="rounded-lg border-2 size-8 text-center"
+                    />
+                <span> de {{totalPages}}</span>
+                <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
+                    <mat-icon>
+                        chevron_right
+                    </mat-icon>
+                </button>
+        </div>
+    }
 }

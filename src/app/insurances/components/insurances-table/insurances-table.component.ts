@@ -8,6 +8,7 @@ import { InsuranceModalComponent } from '../insurance-modal/insurance-modal.comp
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlertsService } from '../../../shared/services/alerts.service';
+import {MatTable, MatCell, MatRow, MatHeaderCell, MatHeaderRow, MatCellDef, MatRowDef, MatHeaderRowDef} from '@angular/material/table'
 
 
 @Component({
@@ -17,7 +18,16 @@ import { AlertsService } from '../../../shared/services/alerts.service';
     MatIconModule,
     MatDialogModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+
+    MatTable,
+    MatCell,
+    MatRow,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatCellDef,
+    MatRowDef,
+    MatHeaderRowDef
   ],
   templateUrl: './insurances-table.component.html',
   styles: ``
@@ -34,9 +44,9 @@ export class InsurancesTableComponent implements OnInit{
   itemsPerPage!:number; 
   currentPage!:number; 
   totalPages !:number;
+  
   ngOnInit(): void {
    this.getListInsurance();
-   
     this.itemsPerPage = 5;
     this.currentPage = 1;
     this.totalPages = Math.ceil(this.insurances.length / this.itemsPerPage);

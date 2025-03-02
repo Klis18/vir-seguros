@@ -3,17 +3,17 @@
         <table class="w-full">
             <thead>
                 <tr class="bg-cyan-900 text-white text-center">
-                    <td class="py-2">Acciones</td>
-                    <td>Cédula</td>
-                    <td>Nombre</td>
-                    <td>Teléfono</td>
-                    <td>Edad</td>
+                    <td class="p-2">Acciones</td>
+                    <td class="p-2">Cédula</td>
+                    <td class="p-2">Nombre</td>
+                    <td class="p-2">Teléfono</td>
+                    <td class="p-2">Edad</td>
                 </tr>
             </thead>
             <tbody>
                 @for(insured of getPageData(); track insured){
                     <tr class="poppins-light text-center border-b-2">
-                        <td class="py-2">
+                        <td class="px-4 py-2">
                             @if(tableType === 'Assignment'){
                                 <mat-icon class="text-cyan-900 mr-4 cursor-pointer" (click)="sendInsured(insured.insuredId)">
                                     add
@@ -28,39 +28,39 @@
                                 </mat-icon>
                             }
                         </td>
-                        <td>{{insured.insuredId}}</td>
-                        <td>{{insured.insuredName}}</td>
-                        <td>{{insured.phone}}</td>
-                        <td>{{insured.age}}</td>
+                        <td class="px-4 py-2">{{insured.insuredId}}</td>
+                        <td class="px-4 py-2">{{insured.insuredName}}</td>
+                        <td class="px-4 py-2">{{insured.phone}}</td>
+                        <td class="px-4 py-2">{{insured.age}}</td>
                     </tr>
                 }
             </tbody>
         </table>
-        @if(totalPages >=1){
-            <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 px-2 flex justify-end items-center w-full">
-                @if(currentPage > 1){
-            
-                    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
-                        <mat-icon>
-                            chevron_left
-                        </mat-icon>
-                    </button>
-                }
-                    <span>Página </span>
-                        <input  type="number" 
-                                [(ngModel)]="currentPage" 
-                                (change)="changePage(currentPage)"
-                                [min]="1"
-                                [max]="totalPages" 
-                                class="rounded-lg border-2 size-8 text-center"
-                        />
-                    <span> de {{totalPages}}</span>
-                    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
-                        <mat-icon>
-                            chevron_right
-                        </mat-icon>
-                    </button>
-            </div>
-        }
     </div>
+    @if(totalPages >=1){
+        <div class="text-right bg-slate-50 py-2 border-t-2 border-cyan-900 px-2 flex justify-end items-center w-full">
+            @if(currentPage > 1){
+        
+                <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="pr-4 flex items-center">
+                    <mat-icon>
+                        chevron_left
+                    </mat-icon>
+                </button>
+            }
+                <span>Página </span>
+                    <input  type="number" 
+                            [(ngModel)]="currentPage" 
+                            (change)="changePage(currentPage)"
+                            [min]="1"
+                            [max]="totalPages" 
+                            class="rounded-lg border-2 size-8 text-center"
+                    />
+                <span> de {{totalPages}}</span>
+                <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="pl-4 flex items-center">
+                    <mat-icon>
+                        chevron_right
+                    </mat-icon>
+                </button>
+        </div>
+    }
 }
